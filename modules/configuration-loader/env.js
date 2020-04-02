@@ -36,7 +36,7 @@ env.json = function envJSON(key, val) {
   }
 };
 
-env.array = function envFloat(...args) {
+env.array = function envArray(...args) {
   let value = env(...args);
 
   if (value.startsWith('[') && value.endsWith(']')) {
@@ -46,6 +46,11 @@ env.array = function envFloat(...args) {
   return value.split(',').map(v => {
     return _.trim(v, '" ');
   });
+};
+
+env.date = function envDate(...args) {
+  const value = env(...args);
+  return new Date(value);
 };
 
 // TODO: add more type casting (dates, json => js object, float, array)
