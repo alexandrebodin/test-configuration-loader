@@ -8,4 +8,6 @@ module.exports = ({ env }) => ({
   url: env('SERVER_URL'),
   host: env('HOST', '0.0.0.0'),
   port: env.int('PORT', 1337),
+  urls: env.array('URLS'),
+  random: env.json('SOME_JSON'),
 });

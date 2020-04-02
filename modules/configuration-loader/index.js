@@ -51,21 +51,29 @@ const loadFiles = dir => {
 };
 
 const parseFile = file => {
-  try {
-    const ext = path.extname(file);
+  const ext = path.extname(file);
 
-    switch (ext) {
-      case '.js': {
+  switch (ext) {
+    case '.js': {
+      try {
         return parseJS(require(file));
+      } catch (error) {
+        throw new Error(
+          `Imposibble to parse js config file ${file}: ${error.message}`
+        );
       }
-      case '.json': {
-        return JSON.parse(fs.readFileSync(file));
-      }
-      default:
-        return {};
     }
-  } catch (err) {
-    return {};
+    case '.json': {
+      try {
+        return JSON.parse(fs.readFileSync(file));
+      } catch (error) {
+        throw new Error(
+          `Imposibble to parse json config file ${file}: ${error.message}`
+        );
+      }
+    }
+    default:
+      return {};
   }
 };
 
