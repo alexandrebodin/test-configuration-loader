@@ -26,7 +26,7 @@ class Config {
   }
 
   set(path, val) {
-    _.set(this.conf, path, defaultValue);
+    _.set(this.conf, path, val);
     return this;
   }
 
@@ -43,6 +43,7 @@ const loadFiles = dir => {
     .filter(file => file.isFile())
     .reduce((acc, file) => {
       const key = path.basename(file.name, path.extname(file.name));
+
       acc[key] = parseFile(path.resolve(dir, file.name));
 
       return acc;

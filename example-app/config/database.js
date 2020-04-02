@@ -16,9 +16,13 @@ module.exports = ({ env }) => ({
         password: env('DATABASE_PASSWORD', 'strapi'),
         port: env('DATABASE_PORT', 5432),
         host: env('DATABASE_HOST', 'localhost'),
+        debug: true,
       },
       options: {
-        ssl: env.bool('DATABASE_SSL', false),
+        pool: {
+          min: 1,
+          max: 10,
+        },
       },
     },
   },
